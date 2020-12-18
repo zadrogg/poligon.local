@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Blog;
 
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 
-class RestTestController extends Controller
+class PostController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,11 @@ class RestTestController extends Controller
      */
     public function index()
     {
-        dd(1);
+        $items = BlogPost::all(); //withTrashed() - вместе с удаленными
+
+        //dd($items->first()); //[0] - аналог first
+
+        return view('blog.posts.index', compact('items'));
     }
 
     /**

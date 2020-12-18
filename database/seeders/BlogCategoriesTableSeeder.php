@@ -19,7 +19,7 @@ class BlogCategoriesTableSeeder extends Seeder
         $cName = 'Без категории';
         $categories [] = [
             'title'     => $cName,
-            Str::of($cName)-> slug(),
+            "slug"=>Str::of($cName)-> slug(),
             'parent_id' => 0,
         ];
 
@@ -29,7 +29,7 @@ class BlogCategoriesTableSeeder extends Seeder
 
             $categories [] = [
                 'title'     => $cName,
-                Str::of($cName)-> slug(),
+                "slug"=>Str::of($cName)-> slug(),
                 'parent_id' => $parentId,
             ];
         }
