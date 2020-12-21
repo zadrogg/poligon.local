@@ -37,7 +37,7 @@ class BlogPostFactory extends Factory
             'content_raw'   => $txt,
             'content_html'  => $txt,
             'is_published'  => $isPublished,
-            'at_published'  => $isPublished ? $this->faker->dateTimeBetween('-2 months', '-1 days') : null,
+            'published_at'  => $isPublished ? $this->faker->dateTimeBetween('-2 months', '-1 days') : null,
             'created_at'    => $createdAt,
             'updated_at'    => $createdAt, 
         ];
