@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\BlogCategory;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        dd(__METHOD__);
+        //$dsd = BlogCategory::all();
+        $paginator = BlogCategory::paginate(15);
+        //dd($paginator);
+        //dd($dsd, $paginator);
+
+        return view('blog.admin.category.index', compact('paginator'));
     }
 
     /**
