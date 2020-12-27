@@ -50,7 +50,7 @@ class CategoryController extends BaseController
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
         }
-        
+
         // Создаст объект, но не добавит в БД
         // $item = new BlogCategory($data);
         // dd($item);
@@ -59,7 +59,7 @@ class CategoryController extends BaseController
         // Создаст объект и добавит в БД
         $item = (new BlogCategory())->create($data);
 
-        if($item) {
+        if ($item) {
             return redirect()->route('blog.admin.categories.edit', [$item->id])->with(['success' => 'Успешно сохранено']);
         } else {
             return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
@@ -77,7 +77,7 @@ class CategoryController extends BaseController
         //$item = BlogCategory::find($id);
         $item = BlogCategory::findOrFail($id); //недопустимо
         //$item[] = BlogCategory::where('id', $id)->first(); //get-collection
-         
+
         //dd(collect($item)->pluck('id'));
         $categoryList = BlogCategory::all();
 
@@ -101,7 +101,7 @@ class CategoryController extends BaseController
         // ];
 
         //$validatedData = $this->validate($request, $rules); //Обращение к контроллеру
-        
+
         // $validatedData = $request->validate($rules); //Обращение к requrest
 
         // $validator = \Validator::make($request->all(), $rules); //Валидация вручную
@@ -115,7 +115,7 @@ class CategoryController extends BaseController
         // dd($validatedData);
 
         $item = BlogCategory::find($id);
-    
+
         if (empty($item)) {
             return back()
                 ->withErrors(['msg' => "Запись id=[$id] не найдена"])
@@ -127,8 +127,10 @@ class CategoryController extends BaseController
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
         }
-        
-        $result = $item->fill($data)->save();
+
+        $result = $item->update($data);
+            // ->fill($data)
+            // ->save();
 
         if ($result) {
             return redirect()
