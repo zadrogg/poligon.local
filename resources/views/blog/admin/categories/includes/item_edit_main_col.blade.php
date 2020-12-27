@@ -19,6 +19,7 @@
                             <label for="title">Заголовок</label>
                             <input name="title" value="{{ $item->title }}" id="title" type="text" class="form-control"
                                 minlength="3" required>
+                                {{ old('title', $item->title) }}
                         </div>
 
                         <div class="form-group">
