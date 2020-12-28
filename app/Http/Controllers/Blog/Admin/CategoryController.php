@@ -6,6 +6,7 @@ use App\Http\Requests\BlogCategoryCreateRequest;
 use App\Http\Requests\BlogCategoryUpdateRequest;
 use App\Models\BlogCategory;
 use Illuminate\Support\Str;
+use App\Repositories\BlogCategoryRepository;
 
 class CategoryController extends BaseController
 {
@@ -72,14 +73,25 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, BlogCategoryRepository $categoryRepository)
     {
-        //$item = BlogCategory::find($id);
-        $item = BlogCategory::findOrFail($id); //недопустимо
-        //$item[] = BlogCategory::where('id', $id)->first(); //get-collection
+        
+        // $categoryRepository = new BlogCategoryRepository(); // создать репозиторий
+        // $categoryRepository = app(BlogCategoryRepository::class); // создать репозиторий
 
-        //dd(collect($item)->pluck('id'));
-        $categoryList = BlogCategory::all();
+        //$item = BlogCategory::find($id);
+        // $item = BlogCategory::findOrFail($id); //недопустимо
+        // //$item[] = BlogCategory::where('id', $id)->first(); //get-collection
+
+        // //dd(collect($item)->pluck('id'));
+        // $categoryList = BlogCategory::all();
+
+        $item = $categoryRepository->getEdit($id);
+        if (empty($item)) {
+            abort(404);
+        }
+
+        $categoryList = $categoryRepository->getForComboBox();
 
         return view('blog.admin.categories.edit', compact('item', 'categoryList'));
     }
@@ -129,8 +141,8 @@ class CategoryController extends BaseController
         }
 
         $result = $item->update($data);
-            // ->fill($data)
-            // ->save();
+        // ->fill($data)
+        // ->save();
 
         if ($result) {
             return redirect()
