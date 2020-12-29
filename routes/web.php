@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RestTestController;
 use App\Http\Controllers\Blog\PostController;
+use App\Http\Controllers\Blog\Admin\blogPostController;
 use App\Http\Controllers\Blog\Admin\CategoryController;
 
 
@@ -27,6 +28,11 @@ Route::group($groupData, function(){
     Route::resource('categories', CategoryController::class)
         ->only($methods)
         ->names('blog.admin.categories');
+        
+    //BlogPost
+    Route::resource('posts', blogPostController::class)
+        ->except(['show'])
+        ->names('blog.admin.posts');
 });
 
 //Route::resource('rest',RestTestController::class)->names('restTest');
