@@ -6,7 +6,6 @@ use App\Http\Controllers\Blog\Admin\BaseController;
 use App\Http\Requests\BlogPostUpdateRequest;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -98,7 +97,7 @@ class blogPostController extends BaseController
     {
         $item = $this->blogPostRepository->getEdit($id);
 
-        if(empty($item)) {
+        if (empty($item)) {
             return back()
                 ->withErrors(['msg' => "Запись id=[$id] не найдена"])
                 ->withInput();
@@ -106,16 +105,17 @@ class blogPostController extends BaseController
 
         $data = $request->all();
 
-        if (empty($data['slug'])) {
-            $data['slug'] = \Str::slug($data['title']);
-        }
-        if (empty($item->published_at) && $data['is_published']) {
-            $data['published_at'] = Carbon::now();
-        }
+        // Ушло в обсервер
+        // if (empty($data['slug'])) {
+        //     $data['slug'] = \Str::slug($data['title']);
+        // }
+        // if (empty($item->published_at) && $data['is_published']) {
+        //     $data['published_at'] = Carbon::now();
+        // }
 
         $result = $item->update($data);
 
-        if($result) {
+        if ($result) {
             return redirect()
                 ->route('blog.admin.posts.edit', $item->id)
                 ->with(['success' => 'Успешно сохранено']);
