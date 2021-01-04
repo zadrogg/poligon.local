@@ -12,9 +12,21 @@ class BlogCategoryObserver
      * @param  \App\Models\BlogCategory  $blogCategory
      * @return void
      */
-    public function created(BlogCategory $blogCategory)
+    public function creating(BlogCategory $blogCategory)
     {
-        //
+        $this->setSlug($blogCategory);
+    }
+
+    /**
+     * @param BlogCategory   $blogCategory
+     * @return void
+     */
+    public function setSlug(BlogCategory $blogCategory)
+    {
+        // dd(__METHOD__, $blogCategory->getDirty());
+        if (empty($blogCategory->slug)) {
+            $blogCategory->slug = \Str::slug($blogCategory->title);
+        }
     }
 
     /**
@@ -23,9 +35,9 @@ class BlogCategoryObserver
      * @param  \App\Models\BlogCategory  $blogCategory
      * @return void
      */
-    public function updated(BlogCategory $blogCategory)
+    public function updating(BlogCategory $blogCategory)
     {
-        //
+        $this->setSlug($blogCategory);
     }
 
     /**
