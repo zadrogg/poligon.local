@@ -9,20 +9,24 @@ class BlogPostObserver
 {
     
     /**
-     * Обработка перед созданием записи
+     * Обработка ПЕРЕД созданием записи
      *
      * @param  \App\Models\BlogPost  $blogPost
      * @return void
      */
     public function creating(BlogPost $blogPost)
     {
-        /*$this->setPublishedAt($blogPost);
+        $this->setPublishedAt($blogPost);
 
-        $this->setSlug($blogPost);*/
+        $this->setSlug($blogPost);
+        
+        $this->setHtml($blogPost);
+
+        $this->setUser($blogPost);
     }
 
     /**
-     * Обработка перед обновлением записи
+     * Обработка ПЕРЕД обновлением записи
      *
      * @param  \App\Models\BlogPost  $blogPost
      * @return void
@@ -73,6 +77,29 @@ class BlogPostObserver
         if (empty($blogPost->slug)) {
             $blogPost->slug = \Str::slug($blogPost->title);
         }
+    }
+
+    /**
+     * Установка значения по полю content_html относительно поля content_raw.
+     * 
+     * @param BlogPost $blogPost
+     */
+    public function setHtml(BlogPost $blogPost)
+    {
+        if ($blogPost->isDirty('content_raw')) {
+            // TODO: тут должна быть генерация markdown -> html
+            $blogPost->content_html = $blogPost->content_raw;
+        }
+    }
+
+    /**
+     * Если не указан user_id, то устанавливаем пользователя по умолчанию
+     * 
+     * @param BlogPost $blogPost
+     */
+    public function setUser(BlogPost $blogPost)
+    {
+        $blogPost->user_id = auth()->id() ?? BlogPost::UNKNOWN_USER;
     }
 
     /**
