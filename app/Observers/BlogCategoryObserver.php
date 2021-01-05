@@ -17,6 +17,19 @@ class BlogCategoryObserver
         $this->setSlug($blogCategory);
     }
 
+     /**
+     * Handle the BlogCategory "created" event.
+     *
+     * @param  \App\Models\BlogCategory  $blogCategory
+     * @return void
+     */
+    public function created(BlogCategory $blogCategory)
+    {
+        //
+    }
+
+    
+
     /**
      * @param BlogCategory   $blogCategory
      * @return void
@@ -39,6 +52,17 @@ class BlogCategoryObserver
     {
         $this->setSlug($blogCategory);
     }
+
+     /**
+     * Handle the BlogPost "updated" event.
+     *
+     * @param  \App\Models\BlogCategory  $blogCategory
+     * @return void
+     */
+    public function updated(BlogCategory $blogCategory)
+    {
+        //
+    } 
 
     /**
      * Handle the BlogCategory "deleted" event.

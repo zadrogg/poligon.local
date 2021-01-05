@@ -26,6 +26,17 @@ class BlogPostObserver
     }
 
     /**
+     * Handle the BlogPost "created" event.
+     *
+     * @param  \App\Models\BlogPost  $blogPost
+     * @return void
+     */
+    public function created(BlogPost $blogPost)
+    {
+        //
+    }
+
+    /**
      * Обработка ПЕРЕД обновлением записи
      *
      * @param  \App\Models\BlogPost  $blogPost
@@ -47,6 +58,17 @@ class BlogPostObserver
 
         // return false;
     }
+
+    /**
+     * Handle the BlogPost "updated" event.
+     *
+     * @param  \App\Models\BlogPost  $blogPost
+     * @return void
+     */
+    public function updated(BlogPost $blogPost)
+    {
+        //
+    }  
 
     /**
      * Если дата публикации не установлена, происходит установка флага - Опубликовано,
@@ -103,6 +125,16 @@ class BlogPostObserver
     }
 
     /**
+     * @param BlogPost $blogPost
+     * @return void
+     */
+    public function deleting(BlogPost $blogPost)
+    {
+        // dd(__METHOD__, $blogPost);
+        // return false;
+    }
+    
+    /**
      * Handle the BlogPost "deleted" event.
      *
      * @param  \App\Models\BlogPost  $blogPost
@@ -110,7 +142,7 @@ class BlogPostObserver
      */
     public function deleted(BlogPost $blogPost)
     {
-        //
+        // dd(__METHOD__, $blogPost);
     }
 
     /**
