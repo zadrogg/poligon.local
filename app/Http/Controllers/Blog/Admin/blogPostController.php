@@ -162,7 +162,27 @@ class blogPostController extends BaseController
                 ->route('blog.admin.posts.index')
                 ->with(['success' => "Запись id[$id] удалена"]);
         } else {
-            return back()->withErrors(['msg' => 'Ошибка удаления']);
+            return back()
+                ->withErrors(['msg' => 'Ошибка удаления']);
         }
     }
+    
+    // /**
+    //  * Восстановить удаленный пост
+    //  * 
+    //  * @param int $id
+    //  */
+    // public function restore($id)
+    // {
+    //     $result = BlogPost::withTrashed()->find($id)->restore();
+
+    //     if ($result) {
+    //         return redirect()
+    //             ->route('blog.admin.posts.index')
+    //             ->with(['success' => "Запись id[$id] восстановлена"]);
+    //     } else {
+    //         return back()
+    //             ->withErrors(['msg' => 'Восстановить невозможно']);
+    //     }
+    // }
 }
