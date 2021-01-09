@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\GenerateCatalog\GenerateCatalogMainJob;
+use App\Jobs\ProcessVideoJob;
 use App\Models\BlogPost;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -129,5 +131,20 @@ class DiggingDeeperController extends Controller
         $sortDescCollection = $collection->sortByDesc('created_at');
 
         dd(compact('sortedSimpleCollection', 'sortedAscCollection', 'sortDescCollection'));
+    }
+
+    public function ProcessVideo()
+    {
+        ProcessVideoJob::dispatch()
+        // Отсрочка выполнения задания от момента помещения в очередь
+        // Не влияет на паузу между попытками выполнять задачу
+        // ->delay(10)
+        // ->onQueue('name_of_queue')
+        ;
+    }
+
+    public function prepareCatalog()
+    {
+        GenerateCatalogMainJob::dispatch();
     }
 }
