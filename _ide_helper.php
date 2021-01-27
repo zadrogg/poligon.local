@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.18.1.
+ * Generated for Laravel 8.24.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -5296,6 +5296,17 @@
                         $instance->assertNotDispatched($event, $callback);
         }
                     /**
+         * Assert that no events were dispatched.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function assertNothingDispatched()
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\EventFake $instance */
+                        $instance->assertNothingDispatched();
+        }
+                    /**
          * Get all of the events matching a truth-test callback.
          *
          * @param string $event
@@ -7338,7 +7349,7 @@
                     /**
          * Queue a new e-mail message for sending.
          *
-         * @param string|array $view
+         * @param \Illuminate\Contracts\Mail\Mailable|string|array $view
          * @param string|null $queue
          * @return mixed 
          * @static 
@@ -8099,6 +8110,83 @@
                         return $instance->setConnectionName($name);
         }
                     /**
+         * Release a reserved job back onto the queue.
+         *
+         * @param string $queue
+         * @param \Illuminate\Queue\Jobs\DatabaseJobRecord $job
+         * @param int $delay
+         * @return mixed 
+         * @static 
+         */ 
+        public static function release($queue, $job, $delay)
+        {
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
+                        return $instance->release($queue, $job, $delay);
+        }
+                    /**
+         * Delete a reserved job from the queue.
+         *
+         * @param string $queue
+         * @param string $id
+         * @return void 
+         * @throws \Throwable
+         * @static 
+         */ 
+        public static function deleteReserved($queue, $id)
+        {
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
+                        $instance->deleteReserved($queue, $id);
+        }
+                    /**
+         * Delete a reserved job from the reserved queue and release it.
+         *
+         * @param string $queue
+         * @param \Illuminate\Queue\Jobs\DatabaseJob $job
+         * @param int $delay
+         * @return void 
+         * @static 
+         */ 
+        public static function deleteAndRelease($queue, $job, $delay)
+        {
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
+                        $instance->deleteAndRelease($queue, $job, $delay);
+        }
+                    /**
+         * Delete all of the jobs from the queue.
+         *
+         * @param string $queue
+         * @return int 
+         * @static 
+         */ 
+        public static function clear($queue)
+        {
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
+                        return $instance->clear($queue);
+        }
+                    /**
+         * Get the queue or return the default.
+         *
+         * @param string|null $queue
+         * @return string 
+         * @static 
+         */ 
+        public static function getQueue($queue)
+        {
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
+                        return $instance->getQueue($queue);
+        }
+                    /**
+         * Get the underlying database instance.
+         *
+         * @return \Illuminate\Database\Connection 
+         * @static 
+         */ 
+        public static function getDatabase()
+        {
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
+                        return $instance->getDatabase();
+        }
+                    /**
          * Get the backoff for an object-based queue handler.
          *
          * @param mixed $job
@@ -8107,7 +8195,7 @@
          */ 
         public static function getJobBackoff($job)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
                         return $instance->getJobBackoff($job);
         }
                     /**
@@ -8119,7 +8207,7 @@
          */ 
         public static function getJobExpiration($job)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
                         return $instance->getJobExpiration($job);
         }
                     /**
@@ -8131,7 +8219,7 @@
          */ 
         public static function createPayloadUsing($callback)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        \Illuminate\Queue\SyncQueue::createPayloadUsing($callback);
+                        \Illuminate\Queue\DatabaseQueue::createPayloadUsing($callback);
         }
                     /**
          * Set the IoC container instance.
@@ -8142,7 +8230,7 @@
          */ 
         public static function setContainer($container)
         {            //Method inherited from \Illuminate\Queue\Queue         
-                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        /** @var \Illuminate\Queue\DatabaseQueue $instance */
                         $instance->setContainer($container);
         }
          
@@ -9007,7 +9095,6 @@
          *
          * @param array $proxies A list of trusted proxies, the string 'REMOTE_ADDR' will be replaced with $_SERVER['REMOTE_ADDR']
          * @param int $trustedHeaderSet A bit field of Request::HEADER_*, to set which headers to trust from your proxies
-         * @throws \InvalidArgumentException When $trustedHeaderSet is invalid
          * @static 
          */ 
         public static function setTrustedProxies($proxies, $trustedHeaderSet)
@@ -9677,7 +9764,6 @@
          *
          * @param bool $asResource If true, a resource will be returned
          * @return string|resource The request body content or a resource to read the body stream
-         * @throws \LogicException
          * @static 
          */ 
         public static function getContent($asResource = false)
@@ -11518,6 +11604,18 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
+        }
+                    /**
+         * 
+         *
+         * @see \Orchid\Platform\Providers\FoundationServiceProvider::register()
+         * @param mixed $url
+         * @param mixed $screen
+         * @static 
+         */ 
+        public static function screen($url, $screen)
+        {
+                        return \Illuminate\Routing\Router::screen($url, $screen);
         }
                     /**
          * 
@@ -14578,6 +14676,23 @@
         class Str {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class Collection {
+                    /**
+         * 
+         *
+         * @see \Barryvdh\Debugbar\ServiceProvider::register()
+         * @static 
+         */ 
+        public static function debug()
+        {
+                        return \Illuminate\Support\Collection::debug();
+        }
+         
+    }
      
 }
 
@@ -15359,6 +15474,490 @@
      
 }
 
+    namespace Orchid\Support\Facades { 
+            /**
+     * Class Alert.
+     *
+     */ 
+        class Alert {
+                    /**
+         * Flash an information message.
+         *
+         * @param string $message
+         * @return \Alert 
+         * @static 
+         */ 
+        public static function info($message)
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->info($message);
+        }
+                    /**
+         * Flash a general message.
+         *
+         * @param string $message
+         * @param \Orchid\Alert\Color|null $level
+         * @return \Alert 
+         * @static 
+         */ 
+        public static function message($message, $level = null)
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->message($message, $level);
+        }
+                    /**
+         * Flash a success message.
+         *
+         * @param string $message
+         * @return \Alert 
+         * @static 
+         */ 
+        public static function success($message)
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->success($message);
+        }
+                    /**
+         * Flash an error message.
+         *
+         * @param string $message
+         * @return \Alert 
+         * @static 
+         */ 
+        public static function error($message)
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->error($message);
+        }
+                    /**
+         * Flash a warning message.
+         *
+         * @param string $message
+         * @return \Alert 
+         * @static 
+         */ 
+        public static function warning($message)
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->warning($message);
+        }
+                    /**
+         * Flash a view message.
+         *
+         * @param string $template
+         * @param \Orchid\Alert\Color|null $level
+         * @param array $data
+         * @throws \Throwable
+         * @return \Alert 
+         * @static 
+         */ 
+        public static function view($template, $level = null, $data = [])
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->view($template, $level, $data);
+        }
+                    /**
+         * Checks if a message has been set before.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function check()
+        {
+                        /** @var \Orchid\Alert\Alert $instance */
+                        return $instance->check();
+        }
+         
+    }
+            /**
+     * Class Dashboard.
+     *
+     * @method static bool checkUpdate()
+     */ 
+        class Dashboard {
+                    /**
+         * Get the version number of the application.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function version()
+        {
+                        return \Orchid\Platform\Dashboard::version();
+        }
+                    /**
+         * Get the route with the dashboard prefix.
+         *
+         * @param string $path
+         * @return string 
+         * @static 
+         */ 
+        public static function prefix($path = '')
+        {
+                        return \Orchid\Platform\Dashboard::prefix($path);
+        }
+                    /**
+         * Configure the Dashboard application.
+         *
+         * @param array $options
+         * @return void 
+         * @static 
+         */ 
+        public static function configure($options)
+        {
+                        \Orchid\Platform\Dashboard::configure($options);
+        }
+                    /**
+         * Get a Dashboard configuration option.
+         *
+         * @param string $key
+         * @param mixed|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function option($key, $default = null)
+        {
+                        return \Orchid\Platform\Dashboard::option($key, $default);
+        }
+                    /**
+         * 
+         *
+         * @param string $key
+         * @param string|null $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function modelClass($key, $default = null)
+        {
+                        return \Orchid\Platform\Dashboard::modelClass($key, $default);
+        }
+                    /**
+         * Get the class name for a given Dashboard model.
+         *
+         * @param string $key
+         * @param string|null $default
+         * @return string 
+         * @static 
+         */ 
+        public static function model($key, $default = null)
+        {
+                        return \Orchid\Platform\Dashboard::model($key, $default);
+        }
+                    /**
+         * Get the user model class name.
+         *
+         * @param string $key
+         * @param string $custom
+         * @static 
+         */ 
+        public static function useModel($key, $custom)
+        {
+                        return \Orchid\Platform\Dashboard::useModel($key, $custom);
+        }
+                    /**
+         * The real path to the package files.
+         *
+         * @param string $path
+         * @return string 
+         * @static 
+         */ 
+        public static function path($path = '')
+        {
+                        return \Orchid\Platform\Dashboard::path($path);
+        }
+                    /**
+         * Registers a ItemPermission that defines authentication permissions.
+         *
+         * @param \Orchid\Platform\ItemPermission $permission
+         * @return \Orchid\Platform\Dashboard 
+         * @static 
+         */ 
+        public static function registerPermissions($permission)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->registerPermissions($permission);
+        }
+                    /**
+         * Registers a set of models for which full-text search is required.
+         *
+         * @param array $model
+         * @return \Orchid\Platform\Dashboard 
+         * @static 
+         */ 
+        public static function registerSearch($model)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->registerSearch($model);
+        }
+                    /**
+         * 
+         *
+         * @param string $key
+         * @param string|array $value
+         * @return \Dashboard 
+         * @static 
+         */ 
+        public static function registerResource($key, $value)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->registerResource($key, $value);
+        }
+                    /**
+         * Return CSS\JS.
+         *
+         * @param null $key
+         * @return array|\Orchid\Platform\Collection|mixed 
+         * @static 
+         */ 
+        public static function getResource($key = null)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->getResource($key);
+        }
+                    /**
+         * 
+         *
+         * @return \Orchid\Platform\Collection 
+         * @static 
+         */ 
+        public static function getSearch()
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->getSearch();
+        }
+                    /**
+         * 
+         *
+         * @return \Orchid\Platform\Menu 
+         * @static 
+         */ 
+        public static function menu()
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->menu();
+        }
+                    /**
+         * 
+         *
+         * @return \Orchid\Platform\Collection 
+         * @static 
+         */ 
+        public static function getPermission()
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->getPermission();
+        }
+                    /**
+         * Get all registered permissions with the enabled state.
+         *
+         * @return \Orchid\Platform\Collection 
+         * @static 
+         */ 
+        public static function getAllowAllPermission()
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->getAllowAllPermission();
+        }
+                    /**
+         * 
+         *
+         * @param string $key
+         * @return \Orchid\Platform\Dashboard 
+         * @static 
+         */ 
+        public static function removePermission($key)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->removePermission($key);
+        }
+                    /**
+         * 
+         *
+         * @param string $package
+         * @param string $path
+         * @return \Dashboard 
+         * @static 
+         */ 
+        public static function addPublicDirectory($package, $path)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->addPublicDirectory($package, $path);
+        }
+                    /**
+         * 
+         *
+         * @return \Orchid\Platform\Collection 
+         * @static 
+         */ 
+        public static function getPublicDirectory()
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->getPublicDirectory();
+        }
+                    /**
+         * 
+         *
+         * @param \Orchid\Platform\Screen $screen
+         * @return \Orchid\Platform\Dashboard 
+         * @static 
+         */ 
+        public static function setCurrentScreen($screen)
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->setCurrentScreen($screen);
+        }
+                    /**
+         * 
+         *
+         * @return \Orchid\Platform\Screen|null 
+         * @static 
+         */ 
+        public static function getCurrentScreen()
+        {
+                        /** @var \Orchid\Platform\Dashboard $instance */
+                        return $instance->getCurrentScreen();
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Orchid\Platform\Dashboard::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Orchid\Platform\Dashboard::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Orchid\Platform\Dashboard::hasMacro($name);
+        }
+         
+    }
+     
+}
+
+    namespace Tabuna\Breadcrumbs { 
+            /**
+     * Class Breadcrumbs.
+     *
+     */ 
+        class Breadcrumbs {
+                    /**
+         * Register a breadcrumb definition by passing it off to the registrar.
+         *
+         * @param string $route
+         * @param \Closure $definition
+         * @return void 
+         * @throws \Throwable
+         * @static 
+         */ 
+        public static function for($route, $definition)
+        {
+                        /** @var \Tabuna\Breadcrumbs\Manager $instance */
+                        $instance->for($route, $definition);
+        }
+                    /**
+         * 
+         *
+         * @param null $parameters
+         * @return \Tabuna\Breadcrumbs\Collection 
+         * @throws \Throwable
+         * @static 
+         */ 
+        public static function current($parameters = null)
+        {
+                        /** @var \Tabuna\Breadcrumbs\Manager $instance */
+                        return $instance->current($parameters);
+        }
+                    /**
+         * 
+         *
+         * @param string $route
+         * @param mixed|null $parameters
+         * @return \Tabuna\Breadcrumbs\Collection 
+         * @throws \Throwable
+         * @static 
+         */ 
+        public static function generate($route, $parameters = null)
+        {
+                        /** @var \Tabuna\Breadcrumbs\Manager $instance */
+                        return $instance->generate($route, $parameters);
+        }
+                    /**
+         * 
+         *
+         * @param string|null $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($name = null)
+        {
+                        /** @var \Tabuna\Breadcrumbs\Manager $instance */
+                        return $instance->has($name);
+        }
+                    /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Tabuna\Breadcrumbs\Manager::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Tabuna\Breadcrumbs\Manager::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Tabuna\Breadcrumbs\Manager::hasMacro($name);
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -15426,6 +16025,18 @@
                     /**
          * 
          *
+         * @see \Orchid\Platform\Providers\FoundationServiceProvider::register()
+         * @param mixed $url
+         * @param mixed $screen
+         * @static 
+         */ 
+        public static function screen($url, $screen)
+        {
+                        return \Illuminate\Routing\Router::screen($url, $screen);
+        }
+                    /**
+         * 
+         *
          * @see \Laravel\Ui\AuthRouteMethods::auth()
          * @param mixed $options
          * @static 
@@ -15463,6 +16074,24 @@
         public static function emailVerification()
         {
                         return \Illuminate\Routing\Router::emailVerification();
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class Route {
+                    /**
+         * 
+         *
+         * @see \Tabuna\Breadcrumbs\BreadcrumbsServiceProvider::register()
+         * @param callable $closure
+         * @static 
+         */ 
+        public static function breadcrumbs($closure)
+        {
+                        return \Illuminate\Routing\Route::breadcrumbs($closure);
         }
          
     }
@@ -15800,6 +16429,21 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->firstOr($columns, $callback);
+            }
+             
+                /**
+             * Execute the query and get the first result if it's the sole matching record.
+             *
+             * @param array|string $columns
+             * @return \Illuminate\Database\Eloquent\Model 
+             * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+             * @throws \Illuminate\Database\MultipleRecordsFoundException
+             * @static 
+             */ 
+            public static function sole($columns = [])
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->sole($columns);
             }
              
                 /**
@@ -16169,122 +16813,6 @@ namespace  {
             }
              
                 /**
-             * Chunk the results of the query.
-             *
-             * @param int $count
-             * @param callable $callback
-             * @return bool 
-             * @static 
-             */ 
-            public static function chunk($count, $callback)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->chunk($count, $callback);
-            }
-             
-                /**
-             * Execute a callback over each item while chunking.
-             *
-             * @param callable $callback
-             * @param int $count
-             * @return bool 
-             * @static 
-             */ 
-            public static function each($callback, $count = 1000)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->each($callback, $count);
-            }
-             
-                /**
-             * Chunk the results of a query by comparing IDs.
-             *
-             * @param int $count
-             * @param callable $callback
-             * @param string|null $column
-             * @param string|null $alias
-             * @return bool 
-             * @static 
-             */ 
-            public static function chunkById($count, $callback, $column = null, $alias = null)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->chunkById($count, $callback, $column, $alias);
-            }
-             
-                /**
-             * Execute a callback over each item while chunking by ID.
-             *
-             * @param callable $callback
-             * @param int $count
-             * @param string|null $column
-             * @param string|null $alias
-             * @return bool 
-             * @static 
-             */ 
-            public static function eachById($callback, $count = 1000, $column = null, $alias = null)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->eachById($callback, $count, $column, $alias);
-            }
-             
-                /**
-             * Execute the query and get the first result.
-             *
-             * @param array|string $columns
-             * @return \Illuminate\Database\Eloquent\Model|object|static|null 
-             * @static 
-             */ 
-            public static function first($columns = [])
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->first($columns);
-            }
-             
-                /**
-             * Apply the callback's query changes if the given "value" is true.
-             *
-             * @param mixed $value
-             * @param callable $callback
-             * @param callable|null $default
-             * @return mixed|$this 
-             * @static 
-             */ 
-            public static function when($value, $callback, $default = null)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->when($value, $callback, $default);
-            }
-             
-                /**
-             * Pass the query to a given callback.
-             *
-             * @param callable $callback
-             * @return \Illuminate\Database\Eloquent\Builder|static 
-             * @static 
-             */ 
-            public static function tap($callback)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->tap($callback);
-            }
-             
-                /**
-             * Apply the callback's query changes if the given "value" is false.
-             *
-             * @param mixed $value
-             * @param callable $callback
-             * @param callable|null $default
-             * @return mixed|$this 
-             * @static 
-             */ 
-            public static function unless($value, $callback, $default = null)
-            {
-                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
-                                return $instance->unless($value, $callback, $default);
-            }
-             
-                /**
              * Add a relationship count / exists condition to the query.
              *
              * @param \Illuminate\Database\Eloquent\Relations\Relation|string $relation
@@ -16640,6 +17168,137 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->explain();
+            }
+             
+                /**
+             * Chunk the results of the query.
+             *
+             * @param int $count
+             * @param callable $callback
+             * @return bool 
+             * @static 
+             */ 
+            public static function chunk($count, $callback)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->chunk($count, $callback);
+            }
+             
+                /**
+             * Execute a callback over each item while chunking.
+             *
+             * @param callable $callback
+             * @param int $count
+             * @return bool 
+             * @static 
+             */ 
+            public static function each($callback, $count = 1000)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->each($callback, $count);
+            }
+             
+                /**
+             * Chunk the results of a query by comparing IDs.
+             *
+             * @param int $count
+             * @param callable $callback
+             * @param string|null $column
+             * @param string|null $alias
+             * @return bool 
+             * @static 
+             */ 
+            public static function chunkById($count, $callback, $column = null, $alias = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->chunkById($count, $callback, $column, $alias);
+            }
+             
+                /**
+             * Execute a callback over each item while chunking by ID.
+             *
+             * @param callable $callback
+             * @param int $count
+             * @param string|null $column
+             * @param string|null $alias
+             * @return bool 
+             * @static 
+             */ 
+            public static function eachById($callback, $count = 1000, $column = null, $alias = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->eachById($callback, $count, $column, $alias);
+            }
+             
+                /**
+             * Execute the query and get the first result.
+             *
+             * @param array|string $columns
+             * @return \Illuminate\Database\Eloquent\Model|object|static|null 
+             * @static 
+             */ 
+            public static function first($columns = [])
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->first($columns);
+            }
+             
+                /**
+             * Execute the query and get the first result if it's the sole matching record.
+             *
+             * @param array|string $columns
+             * @return \Illuminate\Database\Eloquent\Model|object|static|null 
+             * @throws \Illuminate\Database\RecordsNotFoundException
+             * @throws \Illuminate\Database\MultipleRecordsFoundException
+             * @static 
+             */ 
+            public static function baseSole($columns = [])
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->baseSole($columns);
+            }
+             
+                /**
+             * Apply the callback's query changes if the given "value" is true.
+             *
+             * @param mixed $value
+             * @param callable $callback
+             * @param callable|null $default
+             * @return mixed|$this 
+             * @static 
+             */ 
+            public static function when($value, $callback, $default = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->when($value, $callback, $default);
+            }
+             
+                /**
+             * Pass the query to a given callback.
+             *
+             * @param callable $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function tap($callback)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->tap($callback);
+            }
+             
+                /**
+             * Apply the callback's query changes if the given "value" is false.
+             *
+             * @param mixed $value
+             * @param callable $callback
+             * @param callable|null $default
+             * @return mixed|$this 
+             * @static 
+             */ 
+            public static function unless($value, $callback, $default = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->unless($value, $callback, $default);
             }
              
                 /**
@@ -18582,6 +19241,9 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Debugbar extends \Barryvdh\Debugbar\Facade {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
+            class Alert extends \Orchid\Support\Facades\Alert {}
+            class Dashboard extends \Orchid\Support\Facades\Dashboard {}
+            class Breadcrumbs extends \Tabuna\Breadcrumbs\Breadcrumbs {}
      
 }
 
