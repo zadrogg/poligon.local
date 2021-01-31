@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchid\Screen\AsSource;
 
 /**
  * Class BlogCategory
@@ -18,6 +19,7 @@ class BlogCategory extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use AsSource;
 
     /**
      * Id корня

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Orchid\Screen\AsSource;
 
 /**
  * Class BlogPost
@@ -24,6 +25,7 @@ class BlogPost extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use AsSource;
 
     const UNKNOWN_USER = 1;
 
@@ -36,7 +38,7 @@ class BlogPost extends Model
         'content_raw',
         'is_published',
         'published_at',
-        // 'user_id',
+        'user_id',
     ];
 
     /**

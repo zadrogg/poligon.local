@@ -1,7 +1,11 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types = 1);
 
+use App\Orchid\Screens\blog\category\CategoryEditScreen;
+use App\Orchid\Screens\blog\category\CategoryListScreen;
+use App\Orchid\Screens\blog\PostEditScreen;
+use App\Orchid\Screens\blog\PostListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -27,7 +31,7 @@ use Tabuna\Breadcrumbs\Trail;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the need "dashboard" middleware group. Now create something great!
 |
-*/
+ */
 
 // Main
 Route::screen('/main', PlatformScreen::class)
@@ -104,6 +108,18 @@ Route::screen('example', ExampleScreen::class)
             ->parent('platform.index')
             ->push(__('Example screen'));
     });
+
+Route::screen('post/{post?}', PostEditScreen::class)
+    ->name('platform.post.edit');
+
+Route::screen('posts', PostListScreen::class)
+    ->name('platform.post.list');
+
+Route::screen('category/{category?}', CategoryEditScreen::class)
+    ->name('platform.category.edit');
+
+Route::screen('categories', CategoryListScreen::class)
+    ->name('platform.category.list');
 
 Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
 Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');

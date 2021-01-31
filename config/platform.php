@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'domain' => 'poligon.local',
+    'domain' => env('DASHBOARD_DOMAIN', null),
 
     /*
     |--------------------------------------------------------------------------
